@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Dashboard | Smart Community Issue Reporter</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🏙️ Citizen Dashboard</h1>
+        <p>Smart Community Issue Reporter</p>
+    </header>
+
+    <nav>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('track_complaint') }}">Track Complaint</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+
+    <main class="container">
+
+        <section class="welcome-box">
+            <h2>Welcome, {{ session['user_name'] }}! 👋</h2>
+            <p>
+                Together, we can make our community cleaner,
+                safer, and better.
+            </p>
+        </section>
+
+        <h2 class="section-title">What Would You Like to Do?</h2>
+
+        <div class="dashboard-grid">
+
+            <div class="dashboard-card">
+                <div class="dashboard-icon">📝</div>
+                
+                <p><em>Complaint form coming in the next development step.</em></p>
+            </div>
+<div class="dashboard-card">
+    <div class="dashboard-icon">📝</div>
+
+    <h3>Report an Issue</h3>
+
+    <p>
+        Report garbage, damaged roads, drainage problems,
+        streetlight failures, and other civic issues.
+    </p>
+
+    <a class="button button-primary"
+       href="{{ url_for('submit_complaint') }}">
+        Report Now
+    </a>
+</div>
+            <div class="dashboard-card">
+                <div class="dashboard-icon">🔎</div>
+                <h3>Track a Complaint</h3>
+                <p>Check the current status of a reported issue.</p>
+
+                <a class="button"
+                   href="{{ url_for('track_complaint') }}">
+                    Track Complaint
+                </a>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="dashboard-icon">🤝</div>
+                <h3>Community Issues</h3>
+                <p>
+                    Discover existing issues and help identify
+                    problems affecting multiple citizens.
+                </p>
+                <p><em>Shared issue feature coming soon.</em></p>
+            </div>
+
+        </div>
+
+        <div class="button-group">
+            <a class="button button-danger"
+               href="{{ url_for('logout') }}">
+                Logout
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Smart Community Issue Reporter | Together for a Better Community</p>
+    </footer>
+
+</body>
+</html>

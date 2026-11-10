@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Community Issue Reporter</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h2>🏙️ Smart Community Issue Reporter</h2>
+        <p>Report it. Track it. Improve your community.</p>
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+            <div class="hero-icon">🌍</div>
+
+            <h1>Make Your Community Better</h1>
+
+            <p>
+                Help build cleaner, safer, and better communities.
+                Report civic problems, discover existing issues,
+                and follow their progress through one convenient platform.
+            </p>
+
+            <div class="button-group">
+                <a class="button button-primary"
+                   href="{{ url_for('register') }}">
+                    Get Started — Register
+                </a>
+
+                <a class="button button-outline"
+                   href="{{ url_for('login') }}">
+                    Login to Your Account
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Smart Community Issue Reporter | Building Better Communities Together</p>
+    </footer>
+
+</body>
+</html>

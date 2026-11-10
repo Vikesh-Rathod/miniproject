@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Complaint Submitted</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Complaint Submitted Successfully!</h1>
+
+        <p>
+            Thank you for helping improve your community.
+        </p>
+
+        <p>
+            Your Complaint ID is:
+        </p>
+
+        <h2>#{{ complaint_id }}</h2>
+
+        <p>
+            Please save this ID to track your complaint later.
+        </p>
+
+        <a class="button button-primary"
+           href="{{ url_for('track_complaint') }}">
+            Track Complaint
+        </a>
+
+        <br><br>
+
+        <a href="{{ url_for('dashboard') }}">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+</body>
+</html>

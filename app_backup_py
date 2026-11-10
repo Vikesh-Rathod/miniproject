@@ -1,0 +1,51 @@
+from flask import Flask, render_template, request, redirect, url_for
+import sqlite3
+
+app = Flask(__name__)
+
+
+# Connect to the database
+def get_db_connection():
+    conn = sqlite3.connect("complaints.db")
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+# Home page
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+
+# Submit a complaint
+# Track a complaint
+@app.route("/track", methods=["GET", "POST"])
+def track_complaint():
+    complaint = None
+    error = None
+
+    if request.method == "POST":
+        complaint_id = request.form.get("complaint_id", "").strip()
+
+        if complaint_id.isdigit():
+            conn = get_db_connection()
+
+            complaint = conn.execute(
+                "SELECT * FROM complaints WHERE id = ?",
+                (int(complaint_id),)
+            ).fetchone()
+
+            conn.close()
+
+        if complaint is None:
+            error = "Complaint not found. Please check your ID."
+
+    return render_template(
+        "track.html",
+        complaint=complaint,
+        error=error
+    )
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

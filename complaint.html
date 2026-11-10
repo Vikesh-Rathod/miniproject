@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Report an Issue</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Report a Community Issue</h1>
+
+        <p>
+            Help improve your community by reporting a civic issue.
+        </p>
+
+        <form method="POST"
+              action="{{ url_for('submit_complaint') }}">
+
+            <label for="category">Issue Category</label>
+
+            <select id="category" name="category" required>
+                <option value="">Select a category</option>
+                <option value="Garbage">Garbage</option>
+                <option value="Road">Damaged Road</option>
+                <option value="Drainage">Drainage Problem</option>
+                <option value="Water">Water Problem</option>
+                <option value="Streetlight">Streetlight Problem</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <br><br>
+
+            <label for="description">
+                Describe the Issue
+            </label>
+
+            <textarea
+                id="description"
+                name="description"
+                rows="5"
+                maxlength="2000"
+                placeholder="Explain the problem..."
+                required></textarea>
+
+            <br><br>
+
+            <label for="location">
+                Issue Location
+            </label>
+
+            <input
+                type="text"
+                id="location"
+                name="location"
+                maxlength="250"
+                placeholder="Enter the area or location"
+                required>
+
+            <br><br>
+
+            <button type="submit" class="button button-primary">
+                Submit Complaint
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="{{ url_for('dashboard') }}">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+</body>
+</html>

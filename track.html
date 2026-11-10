@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Track Complaint | Smart Community Issue Reporter</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .tracking-card {
+            max-width: 650px;
+            margin: 40px auto;
+        }
+
+        .tracking-icon {
+            font-size: 45px;
+            text-align: center;
+        }
+
+        .tracking-card h2 {
+            color: #142d4e;
+            text-align: center;
+        }
+
+        .tracking-description {
+            color: #68778d;
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 22px;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-left: 5px solid #0d9488;
+            border-radius: 12px;
+            overflow-wrap: anywhere;
+        }
+
+        .result h3 {
+            color: #0f766e;
+            margin-top: 0;
+        }
+
+        .detail-row {
+            padding: 12px 0;
+            border-bottom: 1px solid #d1fae5;
+            line-height: 1.6;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 13px;
+            border-radius: 20px;
+            background: #fef3c7;
+            color: #92400e;
+            font-weight: bold;
+        }
+
+        .error {
+            margin-top: 20px;
+            padding: 13px;
+            background: #fee2e2;
+            color: #991b1b;
+            border-radius: 8px;
+        }
+
+        .tracking-form button {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .tracking-card {
+                margin: 25px auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🔎 Complaint Tracking</h1>
+        <p>Smart Community Issue Reporter</p>
+    </header>
+
+    <nav>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+
+    <main class="container">
+
+        <section class="card tracking-card">
+
+            <div class="tracking-icon">📋</div>
+
+            <h2>Track Your Complaint</h2>
+
+            <p class="tracking-description">
+                Enter your complaint ID to check its current status
+                and view the reported issue details.
+            </p>
+
+            <form class="tracking-form"
+                  method="POST"
+                  action="{{ url_for('track_complaint') }}">
+
+                <div class="form-group">
+                    <label for="complaint_id">Complaint ID</label>
+
+                    <input
+                        type="number"
+                        id="complaint_id"
+                        name="complaint_id"
+                        min="1"
+                        placeholder="e.g. 101"
+                        required
+                    >
+                </div>
+
+                <button type="submit">
+                    🔍 Check Complaint Status
+                </button>
+
+            </form>
+
+            {% if complaint %}
+            <div class="result">
+
+                <h3>✅ Complaint Details</h3>
+
+                <div class="detail-row">
+                    <strong>Complaint ID:</strong>
+                    {{ complaint['id'] }}
+                </div>
+
+                <div class="detail-row">
+                    <strong>Category:</strong>
+                    {{ complaint['category'] }}
+                </div>
+
+                <div class="detail-row">
+                    <strong>Description:</strong>
+                    {{ complaint['description'] }}
+                </div>
+
+                <div class="detail-row">
+                    <strong>Location:</strong>
+                    {{ complaint['location'] }}
+                </div>
+
+                <div class="detail-row">
+                    <strong>Status:</strong>
+
+                    <span class="status">
+                        {{ complaint['status'] }}
+                    </span>
+                </div>
+
+            </div>
+            {% endif %}
+
+            {% if error %}
+                <p class="error">⚠️ {{ error }}</p>
+            {% endif %}
+
+            <div class="navigation">
+                <a class="button button-primary"
+                   href="{{ url_for('dashboard') }}">
+                    ← Back to Dashboard
+                </a>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            Smart Community Issue Reporter |
+            Together for a Better Community
+        </p>
+    </footer>
+
+</body>
+</html>
